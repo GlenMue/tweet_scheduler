@@ -1,0 +1,20 @@
+0000000000000000000000000000000000000000 b182feca59fc89e12edeec7010d405ae38f71f8e unknown <glenmue2020@gmail.com> 1726253369 +0100	commit (initial): this is the initial commit
+b182feca59fc89e12edeec7010d405ae38f71f8e c386268eb5b4fa3eebe588a84d50687479a2f4a8 unknown <glenmue2020@gmail.com> 1726254352 +0100	commit: removed the venv folder
+c386268eb5b4fa3eebe588a84d50687479a2f4a8 0000000000000000000000000000000000000000 unknown <glenmue2020@gmail.com> 1726254555 +0100	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 c386268eb5b4fa3eebe588a84d50687479a2f4a8 unknown <glenmue2020@gmail.com> 1726254555 +0100	Branch: renamed refs/heads/master to refs/heads/main
+c386268eb5b4fa3eebe588a84d50687479a2f4a8 c386268eb5b4fa3eebe588a84d50687479a2f4a8 unknown <glenmue2020@gmail.com> 1726254697 +0100	checkout: moving from main to master
+c386268eb5b4fa3eebe588a84d50687479a2f4a8 c386268eb5b4fa3eebe588a84d50687479a2f4a8 unknown <glenmue2020@gmail.com> 1726254712 +0100	checkout: moving from master to main
+c386268eb5b4fa3eebe588a84d50687479a2f4a8 c386268eb5b4fa3eebe588a84d50687479a2f4a8 unknown <glenmue2020@gmail.com> 1726255280 +0100	checkout: moving from main to master
+c386268eb5b4fa3eebe588a84d50687479a2f4a8 4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a unknown <glenmue2020@gmail.com> 1726255297 +0100	commit: added gitignore
+4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a a67e8c8f3a0c05f50c6ce2b6bfe20e6e681093f1 unknown <glenmue2020@gmail.com> 1726255497 +0100	checkout: moving from master to main
+a67e8c8f3a0c05f50c6ce2b6bfe20e6e681093f1 4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a unknown <glenmue2020@gmail.com> 1726255520 +0100	checkout: moving from main to master
+4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a 4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a unknown <glenmue2020@gmail.com> 1726255538 +0100	checkout: moving from master to main
+4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a 4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a unknown <glenmue2020@gmail.com> 1726255598 +0100	checkout: moving from main to master
+4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a a67e8c8f3a0c05f50c6ce2b6bfe20e6e681093f1 unknown <glenmue2020@gmail.com> 1726255615 +0100	checkout: moving from master to main
+a67e8c8f3a0c05f50c6ce2b6bfe20e6e681093f1 4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a unknown <glenmue2020@gmail.com> 1726255669 +0100	checkout: moving from main to master
+4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a 0000000000000000000000000000000000000000 unknown <glenmue2020@gmail.com> 1726255709 +0100	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a unknown <glenmue2020@gmail.com> 1726255709 +0100	Branch: renamed refs/heads/master to refs/heads/main
+4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a aaa6a77746c50df9a0a6d5ca6131583aad19762f unknown <glenmue2020@gmail.com> 1726255903 +0100	pull origin main --allow-unrelated-histories: Merge made by the 'ort' strategy.
+aaa6a77746c50df9a0a6d5ca6131583aad19762f c6398ea03c4e13cbd9baeebcae1e35e09a9e293c unknown <glenmue2020@gmail.com> 1726293497 +0100	commit: modified gitiginore
+c6398ea03c4e13cbd9baeebcae1e35e09a9e293c db08a188a7bffe4e5e028ebb9dca71bd944ee2f4 unknown <glenmue2020@gmail.com> 1726294065 +0100	commit: modified gitiginore again
+db08a188a7bffe4e5e028ebb9dca71bd944ee2f4 7ff900a7d0cc768a424538b0ff45796ca602ea4e unknown <glenmue2020@gmail.com> 1726294288 +0100	commit: might remove this later

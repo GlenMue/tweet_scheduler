@@ -1,0 +1,7 @@
+0000000000000000000000000000000000000000 c386268eb5b4fa3eebe588a84d50687479a2f4a8 unknown <glenmue2020@gmail.com> 1726254697 +0100	branch: Created from refs/remotes/origin/master
+c386268eb5b4fa3eebe588a84d50687479a2f4a8 4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a unknown <glenmue2020@gmail.com> 1726255297 +0100	commit: added gitignore
+4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a 4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a unknown <glenmue2020@gmail.com> 1726255709 +0100	Branch: renamed refs/heads/master to refs/heads/main
+4b0ae85a9d40d2c6ebe7e19cd6732b79b9ca971a aaa6a77746c50df9a0a6d5ca6131583aad19762f unknown <glenmue2020@gmail.com> 1726255903 +0100	pull origin main --allow-unrelated-histories: Merge made by the 'ort' strategy.
+aaa6a77746c50df9a0a6d5ca6131583aad19762f c6398ea03c4e13cbd9baeebcae1e35e09a9e293c unknown <glenmue2020@gmail.com> 1726293497 +0100	commit: modified gitiginore
+c6398ea03c4e13cbd9baeebcae1e35e09a9e293c db08a188a7bffe4e5e028ebb9dca71bd944ee2f4 unknown <glenmue2020@gmail.com> 1726294065 +0100	commit: modified gitiginore again
+db08a188a7bffe4e5e028ebb9dca71bd944ee2f4 7ff900a7d0cc768a424538b0ff45796ca602ea4e unknown <glenmue2020@gmail.com> 1726294288 +0100	commit: might remove this later
