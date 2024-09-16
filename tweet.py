@@ -1,7 +1,7 @@
 from os import environ
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import gspread
-import tweepy
+from tweepy import Client
 import time
 from dotenv import load_dotenv
 load_dotenv()
@@ -13,43 +13,61 @@ CONSUMER_KEY = environ['CONSUMER_KEY']
 CONSUMER_KEY_SECRET = environ['CONSUMER_KEY_SECRET']
 ACCESS_TOKEN = environ['ACCESS_TOKEN']
 ACCESS_TOKEN_SECRET = environ['ACCESS_TOKEN_SECRET']
+BEARER_TOKEN = environ['BEARER_TOKEN']
 
-auth = tweepy.OAuth1UserHandler(CONSUMER_KEY, CONSUMER_KEY_SECRET)
-auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+client = Client(
+    consumer_key=CONSUMER_KEY,
+    consumer_secret=CONSUMER_KEY_SECRET,
+    access_token=ACCESS_TOKEN,
+    access_token_secret=ACCESS_TOKEN_SECRET,
+)
 
-api = tweepy.API(auth, wait_on_rate_limit= True)
-
-
-gc = gspread.service_account(filename = 'tweetsheet.json')
-
-sh = gc.open_by_key('195i34hteWh_n6jT8m6VvPmS59W7XDhe3HtBq65e9pTM')
-worksheet = sh.sheet1
+tweet_records = [
+    {
+        'message': "Hello, Twitter! This is my first scheduled tweet.",
+        'time': '2024-09-16 10:00:00',  # Replace with your desired timestamp
+        'done': False,
+    },
+    {
+        'message': "Another scheduled tweet coming up!",
+        'time': '2024-09-16 14:30:00',  # Replace with another timestamp
+        'done': False,
+    },
+    # Add more tweet records as needed
+]
 
 INTERVAL = int(environ['INTERVAL'])
 DEBUG = environ['DEBUG'] == '1'
 
 def main():
     while True:
-        tweet_records = worksheet.get_all_records()
-        current_time = datetime.utcnow() + timedelta(hours = 1)
-        logger.info(f'{len(tweet_records)} tweets found at {current_time.time()}')
+        # tweet_records = worksheet.get_all_records()
+        current_time = datetime.now(timezone.utc)
+        logger.info(f' {len(tweet_records)} tweets found at {current_time.time()}')
+        # empty space
+        print("")
 
-        for index, tweet in enumerate(tweet_records, start = 2):
+        for index, tweet in enumerate(tweet_records):
             msg = tweet['message']
             time_str = tweet['time']
             done = tweet['done']
-            date_time_obj = datetime.strptime(time_str, '%Y-%m-%d %H:%M:%S')
+            date_time_obj = datetime.strptime(time_str, '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
 
             if not done:
-                now_time_in_wat = datetime.utcnow() + timedelta(hours = 1)
+                now_time_in_wat = datetime.now(timezone.utc)
+
                 if date_time_obj < now_time_in_wat:
                     logger.info('this should be tweeted')
                     try:
-                        api.update_status(msg)
-                        worksheet.update_cell(index, 3, 1)
+                        # api.update_status(msg)
+                        client.create_tweet(text= msg)
+                        logger.info(f'tweeted {msg}')
+                        # worksheet.update_cell(index, 3, 1)
+                        tweet['done'] = True  # Mark the tweet as done
+
                     except Exception as e:
                         logger.warning(f'exception during tweet! {e}')
-
+        print("")
         time.sleep(INTERVAL)
 
 
