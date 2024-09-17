@@ -1,19 +1,45 @@
 from flask import Flask, render_template, request, redirect
 from datetime import datetime, timedelta
-import gspread
+from typing import Optional
+from flask_sqlalchemy import SQLAlchemy
+import os
+
+# create the extension
+db = SQLAlchemy()
+# create the app
 app = Flask(__name__)
+# configure the SQLite database, relative to the app instance folder
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///C:/Users/Owner/Downloads/tweet-scheduler/tweet-scheduler/app/tweets.db'
+# initialize the app with the extension
+db.init_app(app)
 
-gc = gspread.service_account(filename = 'tweetsheet.json')
+class Tweet(db.Model):
+    __tablename__ = 'tweets'
 
-sh = gc.open_by_key('195i34hteWh_n6jT8m6VvPmS59W7XDhe3HtBq65e9pTM')
-worksheet = sh.sheet1
+    id = db.Column(db.Integer, primary_key=True)
+    message = db.Column(db.String(280))
+    time = db.Column(db.String)
+    done = db.Column(db.Boolean, default=False)
+    row_index = db.Column(db.Integer)
 
-class Tweet:
-    def __init__(self, message, time, done, row_index):
-        self.message = message
-        self.time = time
-        self.done = done
-        self.row_index = row_index
+with app.app_context():
+    # check if the database exists, if not, create it
+    if not os.path.exists('app/tweets.db'):
+        db.create_all()
+
+# tweet_records = [
+#     {
+#         'message': "Hello, Twitter! This is my first scheduled tweet.",
+#         'time': '2024-09-16 10:00:00',  # Replace with your desired timestamp
+#         'done': False,
+#     },
+#     {
+#         'message': "Another scheduled tweet coming up!",
+#         'time': '2024-09-16 14:30:00',  # Replace with another timestamp
+#         'done': False,
+#     },
+#     # Add more tweet records as needed
+# ]
 
 def get_date_time(date_time_str):
     date_time_obj = None
@@ -24,7 +50,7 @@ def get_date_time(date_time_str):
         error_code = f'Error! {e}'
 
     if date_time_obj is not None:
-        now_time_in_wat = datetime.utcnow() + timedelta(hours = 1)
+        now_time_in_wat = datetime.now()
 
         if not date_time_obj > now_time_in_wat:
             error_code = 'error! time must be in the future'
@@ -33,14 +59,19 @@ def get_date_time(date_time_str):
 
 @app.route('/')
 def tweet_list():
-    tweet_records = worksheet.get_all_records()
+    # tweet_records = worksheet.get_all_records()
     tweets = []
 
-    for index, tweet in enumerate(tweet_records, start = 2):
-        tweet = Tweet(**tweet, row_index = index)
-        tweets.append(tweet)
+    # for index, tweet in enumerate(tweet_records, start = 2):
+    #     tweet = Tweet(**tweet, row_index = index)
+    #     # tweets.append(tweet)
 
-    tweets.reverse()
+    # convert tweets in db to list and add the row_index
+    for tweet in Tweet.query.all():
+        tweets.append(tweet)
+        tweet.row_index = tweets.index(tweet)+1
+
+    # tweets.reverse()
 
     n_open_tweets = sum(1 for tweet in tweets if not tweet.done)
     return render_template('base.html', tweets = tweets, n_open_tweets = n_open_tweets)
@@ -66,13 +97,24 @@ def add_tweet():
     if error_code is not None:
         return error_code
     
-    tweet = [str(date_time_obj), message, 0]
-    worksheet.append_row(tweet)
+    # tweet = [str(date_time_obj), message, 0]
+
+    # add tweet to db
+    new_tweet = Tweet(message = message, time = date_time_obj, done = False)
+    db.session.add(new_tweet)
+    db.session.commit()
+
+    # worksheet.append_row(tweet)
     return redirect('/')
 
 @app.route('/delete/<int:row_index>')
 def delete_tweet(row_index):
-    worksheet.delete_rows(row_index)
+    # worksheet.delete_rows(row_index)
+
+    # delete tweet from db
+    tweet = Tweet.query.get(row_index)
+    db.session.delete(tweet)
+    db.session.commit()
     return redirect('/')
     
 
